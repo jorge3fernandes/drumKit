@@ -1,4 +1,4 @@
-# drumKit
+# Play a little drum from your browser
 
 Just a nice way to practice eventListener() in javascript
 
