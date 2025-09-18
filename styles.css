@@ -1,19 +1,88 @@
+:root {
+  --background-color: #283149;
+  --text-color: #DBEDF3;
+  --accent-color: #DA0463;
+  --border-color: #404B69;
+  --button-bg: #ffffff;
+  --button-text: #DA0463;
+  --button-shadow: #DBEDF3;
+  --footer-text-color: #DBEDF3;
+  --toggle-border: #DBEDF3;
+  --toggle-bg: rgba(219, 237, 243, 0.12);
+  --toggle-text: #DBEDF3;
+}
+
 body {
+  margin: 0;
   text-align: center;
-  background-color: #283149;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: "Arvo", cursive;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light-theme {
+  --background-color: #f6f8fa;
+  --text-color: #1f2933;
+  --accent-color: #c2185b;
+  --border-color: #cbd5e1;
+  --button-bg: #ffffff;
+  --button-text: #c2185b;
+  --button-shadow: rgba(30, 64, 175, 0.35);
+  --footer-text-color: #1f2933;
+  --toggle-border: #94a3b8;
+  --toggle-bg: rgba(148, 163, 184, 0.15);
+  --toggle-text: #1f2933;
+}
+
+.app-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 2rem;
 }
 
 h1 {
+  margin: 0;
   font-size: 5rem;
-  color: #DBEDF3;
+  color: var(--text-color);
   font-family: "Arvo", cursive;
-  text-shadow: 3px 0 #DA0463;
+  text-shadow: 3px 0 var(--accent-color);
+}
 
+.theme-toggle {
+  border: 2px solid var(--toggle-border);
+  background-color: var(--toggle-bg);
+  color: var(--toggle-text);
+  padding: 0.5rem 1.5rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-family: "Arvo", cursive;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border-color: var(--accent-color);
+  outline: none;
+}
+
+.theme-toggle:focus-visible {
+  box-shadow: 0 0 0 3px rgba(218, 4, 99, 0.35);
+}
+
+.theme-toggle:active {
+  transform: translateY(1px);
 }
 
 footer {
-  color: #DBEDF3;
+  color: var(--footer-text-color);
   font-family: sans-serif;
+  margin-bottom: 2rem;
 }
 
 .w {
@@ -45,7 +114,7 @@ footer {
 }
 
 .set {
-  margin: 10% auto;
+  margin: 6% auto 4%;
 }
 
 .game-over {
@@ -54,7 +123,7 @@ footer {
 }
 
 .pressed {
-  box-shadow: 0 3px 4px 0 #DBEDF3;
+  box-shadow: 0 3px 4px 0 var(--button-shadow);
   opacity: 0.5;
 }
 
@@ -64,18 +133,24 @@ footer {
 
 .drum {
   outline: none;
-  border: 10px solid #404B69;
+  border: 10px solid var(--border-color);
   font-size: 5rem;
-  font-family: 'Arvo', cursive;
+  font-family: "Arvo", cursive;
   line-height: 2;
   font-weight: 900;
-  color: #DA0463;
-  text-shadow: 3px 0 #DBEDF3;
+  color: var(--button-text);
+  text-shadow: 3px 0 var(--button-shadow);
   border-radius: 15px;
   display: inline-block;
   width: 150px;
   height: 150px;
   text-align: center;
   margin: 10px;
-  background-color: white;
+  background-color: var(--button-bg);
+  transition: transform 0.1s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.drum:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(218, 4, 99, 0.35);
 }
