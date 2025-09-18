@@ -6,16 +6,55 @@ for (var index = 0; index < buttons.length; index++)
         var buttonInnerHTML = this.innerHTML;
         playSound(buttonInnerHTML)
         buttonAnimation(buttonInnerHTML)
-        
+
     })
 
-document.addEventListener("keydown", function(event){
+document.addEventListener("keydown", function (event) {
 
-    key = event.key
+    var key = event.key
     playSound(key)
     buttonAnimation(key)
 
 })
+
+var themeToggleButton = document.getElementById("theme-toggle")
+var THEME_STORAGE_KEY = "drumkit-theme"
+var Theme = {
+    LIGHT: "light",
+    DARK: "dark"
+}
+
+if (themeToggleButton) {
+    applyTheme(getInitialTheme())
+
+    themeToggleButton.addEventListener("click", function () {
+        var isLightThemeActive = document.body.classList.contains("light-theme")
+        applyTheme(isLightThemeActive ? Theme.DARK : Theme.LIGHT)
+    })
+}
+
+function getInitialTheme() {
+    var storedTheme = localStorage.getItem(THEME_STORAGE_KEY)
+
+    if (storedTheme === Theme.LIGHT || storedTheme === Theme.DARK)
+        return storedTheme
+
+    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches)
+        return Theme.LIGHT
+
+    return Theme.DARK
+}
+
+function applyTheme(theme) {
+    var isLightTheme = theme === Theme.LIGHT
+    var nextTheme = isLightTheme ? Theme.DARK : Theme.LIGHT
+
+    document.body.classList.toggle("light-theme", isLightTheme)
+    themeToggleButton.textContent = nextTheme === Theme.LIGHT ? "Light Mode" : "Dark Mode"
+    themeToggleButton.setAttribute("aria-label", "Switch to " + nextTheme + " mode")
+    themeToggleButton.setAttribute("aria-pressed", String(isLightTheme))
+    localStorage.setItem(THEME_STORAGE_KEY, theme)
+}
 
 function playSound(buttonInnerHTML){
 
@@ -56,10 +95,14 @@ function playSound(buttonInnerHTML){
 }
 
 function buttonAnimation(currentKey){
-    var key = document.querySelector("."+currentKey);
-    key.classList.add("pressed");
+    var keyElement = document.querySelector("."+currentKey);
+
+    if(!keyElement)
+        return
+
+    keyElement.classList.add("pressed");
 
     setTimeout( function(){
-        key.classList.remove("pressed");
+        keyElement.classList.remove("pressed");
     }, 100);
 };
