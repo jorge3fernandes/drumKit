@@ -17,19 +17,18 @@ document.addEventListener("keydown", function (event) {
 
 })
 
-var themeToggleButton = document.getElementById("theme-toggle")
+var themeToggleInput = document.getElementById("theme-toggle")
 var THEME_STORAGE_KEY = "drumkit-theme"
 var Theme = {
     LIGHT: "light",
     DARK: "dark"
 }
 
-if (themeToggleButton) {
+if (themeToggleInput) {
     applyTheme(getInitialTheme())
 
-    themeToggleButton.addEventListener("click", function () {
-        var isLightThemeActive = document.body.classList.contains("light-theme")
-        applyTheme(isLightThemeActive ? Theme.DARK : Theme.LIGHT)
+    themeToggleInput.addEventListener("change", function (event) {
+        applyTheme(event.target.checked ? Theme.LIGHT : Theme.DARK)
     })
 }
 
@@ -50,9 +49,9 @@ function applyTheme(theme) {
     var nextTheme = isLightTheme ? Theme.DARK : Theme.LIGHT
 
     document.body.classList.toggle("light-theme", isLightTheme)
-    themeToggleButton.textContent = nextTheme === Theme.LIGHT ? "Light Mode" : "Dark Mode"
-    themeToggleButton.setAttribute("aria-label", "Switch to " + nextTheme + " mode")
-    themeToggleButton.setAttribute("aria-pressed", String(isLightTheme))
+    themeToggleInput.checked = isLightTheme
+    themeToggleInput.setAttribute("aria-label", "Switch to " + nextTheme + " mode")
+    themeToggleInput.setAttribute("aria-checked", String(isLightTheme))
     localStorage.setItem(THEME_STORAGE_KEY, theme)
 }
 

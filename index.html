@@ -12,7 +12,16 @@
 
   <header class="app-header">
     <h1 id="title">Drum 🥁 Kit</h1>
-    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light mode">Light Mode</button>
+    <div class="theme-toggle" role="presentation">
+      <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">☀️</span>
+      <label class="theme-toggle__control">
+        <input id="theme-toggle" type="checkbox" role="switch" aria-label="Switch to light mode">
+        <span class="theme-toggle__track" aria-hidden="true">
+          <span class="theme-toggle__thumb"></span>
+        </span>
+      </label>
+      <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">🌙</span>
+    </div>
   </header>
   <div class="set">
     <button class="w drum">w</button>
